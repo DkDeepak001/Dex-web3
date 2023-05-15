@@ -37,4 +37,14 @@ describe("DEX", () => {
       expect(await token.balanceOf(dex.address)).to.equal(100);
     });
   });
+  describe("Getters", () => {
+    it("should return the token balance", async () => {
+      await token.approve(dex.address, 100);
+      await dex.reciveToken();
+      expect(await dex.getRemaingToken()).to.equal(100);
+    });
+    it("should return the token price", async () => {
+      expect(await dex.getPrice(10)).to.equal(100 * 10);
+    });
+  });
 });
