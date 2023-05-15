@@ -13,4 +13,17 @@ contract DEX {
         token = _token;
         tokenPrice = _tokenPrice;
     }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function.");
+        _;
+    }
+
+    function reciveToken () external onlyOwner {
+        uint allowance = token.allowance(msg.sender, address(this));
+        require(allowance >= 1, "You must approve tokens before calling this function.");
+        bool sent = token.transferFrom(msg.sender, address(this), allowance);
+        require(sent, "Token transfer failed.");
+    }
+     
 }
