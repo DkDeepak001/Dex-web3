@@ -70,9 +70,20 @@ describe("DEX", () => {
     it("should withdraw the balance", async () => {
       await token.approve(dex.address, 100);
       await dex.reciveToken();
-      await dex.buyToken(10, { value: 1000 });
       await dex.withDrawToken();
       expect(await token.balanceOf(dex.address)).to.equal(0);
+    });
+  });
+
+  describe("withdrawFunds", () => {
+    it("should withdraw the balance", async () => {
+      await token.approve(dex.address, 100);
+      await dex.reciveToken();
+      await dex.buyToken(10, { value: 1000 });
+      expect(await dex.withDrawFunds()).to.changeEtherBalance(
+        [owner.address, dex.address],
+        [-1000, 1000]
+      );
     });
   });
 });
