@@ -26,4 +26,15 @@ contract DEX {
         require(sent, "Token transfer failed.");
     }
      
+     function withDrawToken() external onlyOwner {
+         uint balance = token.balanceOf(address(this));
+         require(balance >= 1, "You must have tokens to withdraw.");
+         bool sent = token.transfer(msg.sender, balance);
+         require(sent, "Token transfer failed.");
+     }
+
+     function withDrawFunds () external onlyOwner {
+        (bool sent,) = payable(msg.sender).call{value: address(this).balance}("");
+        require(sent, "Fund transfer failed.");
+     }
 }
