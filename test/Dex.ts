@@ -47,4 +47,20 @@ describe("DEX", () => {
       expect(await dex.getPrice(10)).to.equal(100 * 10);
     });
   });
+  describe("buy", () => {
+    it("should fail if contract not approved", async () => {
+      await expect(dex.buyToken(10)).to.be.reverted;
+    });
+
+    it("should transfer tokens between accounts", async () => {
+      await token.approve(dex.address, 100);
+      await dex.reciveToken();
+      await dex.buyToken(10, { value: 1000 });
+      expect(await token.balanceOf(addr1.address)).to.changeTokenBalance(
+        token,
+        [addr1.address, dex.address],
+        [-10, 10]
+      );
+    });
+  });
 });
