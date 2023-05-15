@@ -37,4 +37,11 @@ contract DEX {
         (bool sent,) = payable(msg.sender).call{value: address(this).balance}("");
         require(sent, "Fund transfer failed.");
      }
+
+     function buyToken(uint numbTokens) external payable {
+        require(numbTokens <= token.balanceOf(address(this)), "You must have enough tokens to withdraw.");
+        uint price = numbTokens * tokenPrice;
+        require(price == msg.value, "You must send the correct amount of ether.");
+        token.transfer(msg.sender, numbTokens);
+     }
 }
