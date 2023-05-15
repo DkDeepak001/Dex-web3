@@ -44,4 +44,10 @@ contract DEX {
         require(price == msg.value, "You must send the correct amount of ether.");
         token.transfer(msg.sender, numbTokens);
      }
+
+     function getPrice (uint numbTokens) external view returns (uint) {
+         return tokenPrice * numbTokens;
+     }
+
+     
 }
