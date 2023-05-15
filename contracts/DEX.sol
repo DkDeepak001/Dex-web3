@@ -49,5 +49,9 @@ contract DEX {
          return tokenPrice * numbTokens;
      }
 
-     
+     function getRemaingToken () external view returns (uint) {
+         return token.balanceOf(address(this));
+     }
+
+
 }
