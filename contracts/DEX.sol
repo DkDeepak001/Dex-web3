@@ -12,6 +12,7 @@ contract DEX {
     constructor(IERC20 _token, uint _tokenPrice) {
         token = _token;
         tokenPrice = _tokenPrice;
+        owner = msg.sender;
     }
 
     modifier onlyOwner() {
