@@ -63,4 +63,16 @@ describe("DEX", () => {
       );
     });
   });
+  describe("withdraw", () => {
+    it("should fail if not owner", async () => {
+      await expect(dex.withDrawToken()).to.be.reverted;
+    });
+    it("should withdraw the balance", async () => {
+      await token.approve(dex.address, 100);
+      await dex.reciveToken();
+      await dex.buyToken(10, { value: 1000 });
+      await dex.withDrawToken();
+      expect(await token.balanceOf(dex.address)).to.equal(0);
+    });
+  });
 });
