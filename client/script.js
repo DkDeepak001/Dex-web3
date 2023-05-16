@@ -17,7 +17,7 @@ const tokenAbi = [
   "function transferFrom(address from, address to, uint256 amount) returns (bool)",
 ];
 const tokenAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
-const token = null;
+let token = null;
 
 const DexAbi = [
   "constructor(address _token, uint256 _tokenPrice)",
@@ -31,7 +31,7 @@ const DexAbi = [
   "function withDrawToken()",
 ];
 const DexAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
-const dex = null;
+let dex = null;
 
 const init = async () => {
   if (token) return;
@@ -39,4 +39,22 @@ const init = async () => {
   signer = provider.getSigner();
   token = new ethers.Contract(tokenAddress, tokenAbi, signer);
   dex = new ethers.Contract(DexAddress, DexAbi, signer);
+};
+
+const getPrice = async () => {
+  await init();
+  const price = await dex.getPrice(10);
+  document.getElementById("price").innerHTML = price.toString();
+};
+
+const getBalance = async () => {
+  await init();
+  const balance = await token.balanceOf(signer.getAddress());
+  document.getElementById("balance").innerHTML = balance.toString();
+};
+
+const getToken = async () => {
+  await init();
+  const remaingToken = await dex.getRemaingToken();
+  document.getElementById("token").innerHTML = remaingToken.toString();
 };
