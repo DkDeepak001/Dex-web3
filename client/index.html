@@ -50,6 +50,33 @@
         </button>
       </div>
     </div>
+
+    <h2 class="text-3xl font-bold text-center">Swap</h2>
+    <div class="flex flex-row justify-evenly items-center my-5">
+      <div class="flex flex-col items-center">
+        <h2 class="text-2xl font-bold text-center">Access</h2>
+        <div class="flex flex-row items-center gap-2">
+          <input
+            type="text"
+            id="token"
+            placeholder="Enter token"
+            class="border-2 border-gray-500 rounded-lg p-2"
+          />
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onclick="access()"
+          >
+            Access
+          </button>
+        </div>
+      </div>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onclick="sell()"
+      >
+        sell
+      </button>
+    </div>
   </body>
   <script
     src="http://cdn.ethers.io/lib/ethers-5.2.umd.min.js"

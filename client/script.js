@@ -58,3 +58,23 @@ const getToken = async () => {
   const remaingToken = await dex.getRemaingToken();
   document.getElementById("token").innerHTML = remaingToken.toString();
 };
+
+const access = async () => {
+  try {
+    await init();
+    const access = await token.approve(DexAddress, 10);
+    console.log(access);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const sell = async () => {
+  try {
+    await init();
+    const sell = await dex.reciveToken();
+    console.log(sell);
+  } catch (error) {
+    console.log(error);
+  }
+};

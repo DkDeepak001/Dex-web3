@@ -7,7 +7,7 @@ async function main() {
   const token = await Token.deploy(100);
 
   const Dex = await ethers.getContractFactory("DEX");
-  const dex = await Dex.deploy(token.address, 100);
+  const dex = await Dex.deploy(token.address, 10);
 
   await token.deployed();
   await dex.deployed();
